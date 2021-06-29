@@ -67,7 +67,9 @@ function FloAspectBar_OnLoad(self)
 	self.menuHooks = { SetPosition = FloAspectBar_SetPosition, SetBorders = FloAspectBar_SetBorders };
 	self:EnableMouse(1);
 	PetActionBarFrame:EnableMouse(false);
-	ExtraActionBarFrame:EnableMouse(false);
+	if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+		ExtraActionBarFrame:EnableMouse(false);
+	end
 
 	if SHOW_WELCOME then
 		DEFAULT_CHAT_FRAME:AddMessage( "FloAspectBar "..VERSION.." loaded." );
