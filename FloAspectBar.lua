@@ -8,9 +8,9 @@
 
 local VERSION
 if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-	VERSION = "9.1.28.5"
+	VERSION = "9.2.28.5"
 elseif WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
-	VERSION = "1.14.28"
+	VERSION = "1.14.28.3"
 end
 
 -------------------------------------------------------------------------------
