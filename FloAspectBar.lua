@@ -319,7 +319,7 @@ function FloAspectBar_SetPosition(self, bar, mode)
 
 	        if mode == "auto" then
 		        -- Force the auto positionning
-		        FloAspectBar_UpdatePosition(bar);
+		        FloAspectBar_UpdatePosition();
 	        else
 		        -- Force the game to remember position
 		        bar:StartMoving();
