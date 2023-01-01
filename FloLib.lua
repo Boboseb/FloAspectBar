@@ -499,6 +499,7 @@ if not FLOLIB_VERSION or FLOLIB_VERSION < 1.44 then
 
 			local name = self:GetName();
 			local button = _G[name.."Button"..i];
+			button:SetButtonState("NORMAL")
 
 			local spell = self.spells[i];
 
@@ -532,7 +533,6 @@ if not FLOLIB_VERSION or FLOLIB_VERSION < 1.44 then
 					isActive = self["startTime"..pos] ~= 0;
 				end
 			end
-
 			if isActive then
 				button:SetChecked(true);
 			else
