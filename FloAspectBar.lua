@@ -8,7 +8,7 @@
 
 local VERSION
 if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-	VERSION = "9.2.28.5"
+	VERSION = "10.0.28"
 elseif WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
 	VERSION = "1.14.28.3"
 end
@@ -66,7 +66,7 @@ function FloAspectBar_OnLoad(self)
 	self.UpdateState = FloAspectBar_UpdateState;
 	self.menuHooks = { SetPosition = FloAspectBar_SetPosition, SetBorders = FloAspectBar_SetBorders };
 	self:EnableMouse(1);
-	PetActionBarFrame:EnableMouse(false);
+	PetActionBar:EnableMouse(false);
 	if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
 		ExtraActionBarFrame:EnableMouse(false);
 	end
@@ -250,7 +250,9 @@ function FloAspectBar_UpdateState(self, pos)
 	local spell = self.spells[pos];
 
 	if FloLib_UnitHasBuff("player", spell.name) then
-		FloLib_StartTimer(self, nil, spell.id);
+		if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+			FloLib_StartTimer(self, nil, spell.id);
+		end
 	elseif self["activeSpell"..pos] == pos then
         FloLib_ResetTimer(self, pos);
     else
@@ -265,7 +267,7 @@ function FloAspectBar_UpdatePosition()
 		return;
 	end
 
-	local yOffset = 0;
+	local yOffset = 4;
 	local anchorFrame;
 
 	if not MainMenuBar:IsShown() and not (VehicleMenuBar and VehicleMenuBar:IsShown()) then
@@ -274,8 +276,11 @@ function FloAspectBar_UpdatePosition()
 	else
 		anchorFrame = MainMenuBar;
 
-		if SHOW_MULTI_ACTIONBAR_2 then
-			yOffset = yOffset + 40;
+		if MultiBar1_IsVisible() then
+			yOffset = yOffset + 46;
+		end
+		if MultiBar2_IsVisible() then
+			yOffset = yOffset + 46;
 		end
 	end
 
