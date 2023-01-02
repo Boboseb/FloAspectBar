@@ -285,7 +285,7 @@ function FloAspectBar_UpdatePosition()
 	end
 
 	FloAspectBar:ClearAllPoints();
-	FloAspectBar:SetPoint("BOTTOMLEFT", anchorFrame, "TOPLEFT", 512/ACTIVE_OPTIONS.scale, yOffset/ACTIVE_OPTIONS.scale);
+	FloAspectBar:SetPoint("BOTTOMLEFT", anchorFrame, "TOPLEFT", 326/ACTIVE_OPTIONS.scale, yOffset/ACTIVE_OPTIONS.scale);
 end
 
 function FloAspectBar_SetBorders(self, visible)
