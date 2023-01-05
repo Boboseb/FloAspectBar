@@ -267,7 +267,7 @@ function FloAspectBar_UpdatePosition()
 		return;
 	end
 
-	local yOffset = 4;
+	local yOffset = 0;
 	local anchorFrame;
 
 	if not MainMenuBar:IsShown() and not (VehicleMenuBar and VehicleMenuBar:IsShown()) then
@@ -277,10 +277,10 @@ function FloAspectBar_UpdatePosition()
 		anchorFrame = MainMenuBar;
 
 		if MultiBar1_IsVisible() then
-			yOffset = yOffset + 46;
+			yOffset = yOffset + 50;
 		end
 		if MultiBar2_IsVisible() then
-			yOffset = yOffset + 46;
+			yOffset = yOffset + 50;
 		end
 	end
 
