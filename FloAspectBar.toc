@@ -2,7 +2,7 @@
 ## Title: FloAspectBar
 ## Author: Floraline
 ## Notes: Add an aspect bar similar to the paladin's aura bar
-## OptionalDeps: 
+## OptionalDeps: ClassicUI
 ## Dependencies:
 ## SavedVariables: 
 ## SavedVariablesPerCharacter: FLOASPECTBAR_OPTIONS, FLOASPECTBAR_OPTIONS2

@@ -23,6 +23,7 @@ local FLOASPECTBAR_BARSETTINGS_DEFAULT = { position = "auto", buttonsOrder = {},
 local FLOASPECTBAR_OPTIONS_DEFAULT = { [1] = { scale = 1, borders = true, barSettings = FLOASPECTBAR_BARSETTINGS_DEFAULT }, active = 1 };
 FLOASPECTBAR_OPTIONS = FLOASPECTBAR_OPTIONS_DEFAULT;
 local ACTIVE_OPTIONS = FLOASPECTBAR_OPTIONS[1];
+local _classicUI
 
 -- Ugly
 local changingSpec = false;
@@ -72,7 +73,7 @@ function FloAspectBar_OnLoad(self)
 	end
 
 	if SHOW_WELCOME then
-		DEFAULT_CHAT_FRAME:AddMessage( "FloAspectBar "..VERSION.." loaded." );
+		DEFAULT_CHAT_FRAME:AddMessage( "|cffd78900FloAspectBar v"..VERSION.."|r loaded." );
 		SHOW_WELCOME = nil;
 
 		SLASH_FLOASPECTBAR1 = "/floaspectbar";
@@ -84,6 +85,11 @@ function FloAspectBar_OnLoad(self)
 			self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED");
 		end
 		self:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED");
+
+		_classicUI = _G["ClassicUI"]
+		if _classicUI then
+			DEFAULT_CHAT_FRAME:AddMessage( "FloAspectBar : |cffd78900ClassicUI v".._classicUI.VERSION.."|r detected." )
+		end
 	end
 
 	self:RegisterEvent("LEARNED_SPELL_IN_TAB");
@@ -268,6 +274,7 @@ function FloAspectBar_UpdatePosition()
 	end
 
 	local yOffset = 0;
+	local xOffset = 512;
 	local anchorFrame;
 
 	if not MainMenuBar:IsShown() and not (VehicleMenuBar and VehicleMenuBar:IsShown()) then
@@ -276,16 +283,26 @@ function FloAspectBar_UpdatePosition()
 	else
 		anchorFrame = MainMenuBar;
 
-		if MultiBar1_IsVisible() then
-			yOffset = yOffset + 50;
-		end
-		if MultiBar2_IsVisible() then
-			yOffset = yOffset + 50;
+		if _classicUI and _classicUI:IsEnabled() then
+			yOffset = yOffset + 6
+			anchorFrame = CUI_MainMenuBar
+			if MultiBar2_IsVisible() then
+				yOffset = yOffset + 44;
+			end
+
+		else
+			xOffset = 326;
+			if MultiBar1_IsVisible() then
+				yOffset = yOffset + 50;
+			end
+			if MultiBar2_IsVisible() then
+				yOffset = yOffset + 50;
+			end
 		end
 	end
 
 	FloAspectBar:ClearAllPoints();
-	FloAspectBar:SetPoint("BOTTOMLEFT", anchorFrame, "TOPLEFT", 326/ACTIVE_OPTIONS.scale, yOffset/ACTIVE_OPTIONS.scale);
+	FloAspectBar:SetPoint("BOTTOMLEFT", anchorFrame, "TOPLEFT", xOffset/ACTIVE_OPTIONS.scale, yOffset/ACTIVE_OPTIONS.scale);
 end
 
 function FloAspectBar_SetBorders(self, visible)
